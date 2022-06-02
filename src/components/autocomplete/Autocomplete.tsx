@@ -137,7 +137,7 @@ export const Autocomplete = ({
       {isDropdownVisible && (
         <>
           {sortedSuggestions?.length > 0 ? (
-            <ul className="dropdown" ref={dropdownRef}>
+            <ul className="dropdown" ref={dropdownRef} style={dropdownStyle}>
               {sortedSuggestions.map((suggestion: TSuggestion, index) => (
                 <li
                   className={`dropdown-item ${
