@@ -19,6 +19,7 @@ export const App = () => {
   return (
     <div className="App">
       <Autocomplete
+        style={{ maxWidth: "420px" }}
         suggestionsNotFoundContent={<>No matching suggestions found.</>}
         selectedTags={selectedTags}
         suggestions={suggestions}

@@ -10,6 +10,10 @@ type AutocompleteProps = {
   selectedTags?: string[];
   suggestionsNotFoundContent?: ReactNode;
   placeholder?: string;
+  style?: React.CSSProperties;
+  dropdownStyle?: React.CSSProperties;
+  inputStyle?: React.CSSProperties;
+  tagStyle?: React.CSSProperties;
 };
 
 export const KEY_CODE_UP = 38;
@@ -20,6 +24,10 @@ export const Autocomplete = ({
   selectedTags,
   suggestionsNotFoundContent,
   placeholder,
+  style,
+  dropdownStyle,
+  inputStyle,
+  tagStyle,
 }: AutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -103,11 +111,11 @@ export const Autocomplete = ({
   };
 
   return (
-    <div className="autocomplete-wrapper">
+    <div className="autocomplete-wrapper" style={style}>
       <div className="tags-input">
         <ul className="tags">
           {tags.map((tag: string) => (
-            <li key={tag} className="tag">
+            <li key={tag} className="tag" style={tagStyle}>
               <span className="tag-title">{tag}</span>
               <span className="tag-close-icon" onClick={() => removeTags(tag)}>
                 x
@@ -116,6 +124,7 @@ export const Autocomplete = ({
           ))}
         </ul>
         <input
+          style={inputStyle}
           type="text"
           onKeyDown={(e) => handleKeyDown(e)}
           placeholder={placeholder || "Type and press enter to add"}
@@ -142,7 +151,7 @@ export const Autocomplete = ({
               ))}
             </ul>
           ) : (
-            <div className="dropdown">
+            <div className="dropdown" style={dropdownStyle}>
               {suggestionsNotFoundContent || "Suggestions not found"}
             </div>
           )}
