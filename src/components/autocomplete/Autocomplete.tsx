@@ -12,6 +12,7 @@ type AutocompleteProps = {
   placeholder?: string;
   style?: React.CSSProperties;
   dropdownStyle?: React.CSSProperties;
+  dropdownItemStyle?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   tagStyle?: React.CSSProperties;
 };
@@ -26,6 +27,7 @@ export const Autocomplete = ({
   placeholder,
   style,
   dropdownStyle,
+  dropdownItemStyle,
   inputStyle,
   tagStyle,
 }: AutocompleteProps) => {
@@ -140,6 +142,7 @@ export const Autocomplete = ({
             <ul className="dropdown" ref={dropdownRef} style={dropdownStyle}>
               {sortedSuggestions.map((suggestion: TSuggestion, index) => (
                 <li
+                  style={dropdownItemStyle}
                   className={`dropdown-item ${
                     selectedIndex === index ? "active" : ""
                   }`}
