@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Autocomplete } from "./components/autocomplete/Autocomplete";
 
-function App() {
+type TSuggestion = {
+  name: string;
+};
+
+export const App = () => {
+  const [suggestions] = useState<TSuggestion[]>([
+    { name: "Red" },
+    { name: "Blue" },
+    { name: "White" },
+    { name: "Black" },
+    { name: "Magenta" },
+    { name: "Yellow" },
+    { name: "Green" },
+  ]);
+  const selectedTags = ["Violet", "Orange"];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Autocomplete
+        suggestionsNotFoundContent={<>No matching suggestions found.</>}
+        selectedTags={selectedTags}
+        suggestions={suggestions}
+      />
+      XXXXXXXXXXX
     </div>
   );
-}
+};
 
-export default App;
