@@ -33,6 +33,7 @@ export const Autocomplete = ({
 }: AutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
+  const noSuggestionsWrapperRef = useRef<HTMLDivElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
@@ -66,11 +67,13 @@ export const Autocomplete = ({
   useEffect(() => {
     const handleClickOutside = (e: Event) => {
       if (
-        inputRef.current &&
-        isDropdownVisible &&
-        !inputRef.current.contains(e.target as Node) &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
+        (inputRef.current &&
+          isDropdownVisible &&
+          !inputRef.current.contains(e.target as Node) &&
+          dropdownRef.current &&
+          !dropdownRef.current.contains(e.target as Node)) ||
+        (noSuggestionsWrapperRef.current &&
+          !noSuggestionsWrapperRef.current.contains(e.target as Node))
       ) {
         setIsDropdownVisible(false);
       }
@@ -154,7 +157,11 @@ export const Autocomplete = ({
               ))}
             </ul>
           ) : (
-            <div className="dropdown" style={dropdownStyle}>
+            <div
+              className="dropdown"
+              style={dropdownStyle}
+              ref={noSuggestionsWrapperRef}
+            >
               {suggestionsNotFoundContent || "Suggestions not found"}
             </div>
           )}
